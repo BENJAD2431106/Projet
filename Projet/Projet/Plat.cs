@@ -8,7 +8,7 @@ namespace Projet
 {
     public partial class Plat
     {
-        string Nom {  get; set; }
+        public string Nom {  get; set; }
         double Prix { get; set; }
         int Rarete   { get; set; }
         List<string> Ingredients { get; set; }

@@ -8,7 +8,7 @@ namespace Projet
 {
     public partial class Visiteur : Personne
     {
-        public Visiteur(string nom, string prenom, Temperamant temperamant) : base(nom, prenom, temperamant)
+        public Visiteur(string nom, string prenom) : base(nom, prenom)
         {
 
         }
