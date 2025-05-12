@@ -35,6 +35,11 @@
 
             Console.WriteLine("\nAppuie sur une touche pour quitter...");
             Console.ReadKey();
+            Console.Clear();
+
+            Simulation simulation = new Simulation();
+            simulation.LancerSimulation();
+
         }
     }
 
