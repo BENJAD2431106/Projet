@@ -8,7 +8,7 @@ namespace Projet
 {
     public partial class Menu
     {
-        List<Plat> plats = new List<Plat>();
+        public List<Plat> plats = new List<Plat>();
 
         public Menu(){ }
 
@@ -25,10 +25,12 @@ namespace Projet
         public override string ToString()
         {
             string info = "";
+            int cpt = 0;
             info += "Menu J'A Resto\n";
             foreach (var plat in plats)
             {
-                info += plat + "\n";
+                cpt++;
+                info +=cpt +""+plat + "\n";
             }
             return info;
         }
