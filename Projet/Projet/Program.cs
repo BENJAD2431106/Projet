@@ -2,6 +2,7 @@
 {
     internal class Program
     {
+        public static Random rand = new Random();
         static void Main(string[] args)
         {
             Console.WriteLine("Bienvenue chez J'A Resto !");
