@@ -14,7 +14,8 @@ namespace Projet
         Excellente
     }
 
-    public partial class Ingredients
+    public partial class Ingredient
+
     {
         public string Nom { get; set; }
         public int Calorie { get; set; }
@@ -22,7 +23,7 @@ namespace Projet
         public float Prix { get; set; }
 
         [JsonConstructor]
-        public Ingredients(string nom, int calorie, string quantite, float prix)
+        public Ingredient(string nom, int calorie, string quantite, float prix)
         {
             Nom = nom;
             Calorie = calorie;

@@ -23,12 +23,23 @@ namespace Projet
         List<Client> Clients { get; set; }
         Menu Menu {  get; set; }
         Status Status { get; set; }
-        public Restaurant(string nom, Status status, int personneMax)
+        public Restaurant(string nom, int personneMax)
         {
             Nom = nom;
             Visiteurs = new List<Visiteur>();
             Clients = new List<Client>();
-            Status = status;
+            if ((Clients.Count + Visiteurs.Count <= personneMax)&&(Clients.Count + Visiteurs.Count > 0))
+            {
+                Status = Status.Dispo;
+            }
+            else if ((Clients.Count + Visiteurs.Count > personneMax))
+            {
+                Status = Status.Plein;
+            }
+            else if ((Clients.Count + Visiteurs.Count == 0))
+            {
+                Status = Status.Vide;
+            }
             Menu = new Menu();
             this.personneMax = personneMax;
         }

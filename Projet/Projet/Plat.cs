@@ -9,7 +9,7 @@ namespace Projet
     public partial class Plat
     {
         public string Nom {  get; set; }
-        double Prix { get; set; }
+        public double Prix { get; set; }
         int Rarete   { get; set; }
         List<string> Ingredients { get; set; }
         double PrixRecette { get; set; }

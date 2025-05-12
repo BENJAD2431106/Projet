@@ -8,11 +8,18 @@ namespace Projet
 {
     public partial class Simulation
     {
-        Personne Personne { get; set; }
-        Plat Plat { get; set; }
+        List <Personne> Personnes { get; set; }
+        Menu menu { get; set; }
         Restaurant Restaurant { get; set; }
-        Ingredients Ingredients { get; set; }
-        Client Client { get; set; }
+        List <Ingredient> Ingredients { get; set; }
+        List <Client> Clients { get; set; }
+        UsineClient Usine {  get; set; }
+        public Simulation()
+        {
+            Restaurant = new Restaurant("J'A Resto", 60);
+            menu = new Menu();
+            Usine = new UsineClient();
+        }
 
         public void LancerSimulation()
         {
@@ -26,6 +33,7 @@ namespace Projet
                     case 1:
                         Console.Clear();
                         Console.WriteLine("Vous avez choisi le choix 1:");
+                        Restaurant.AfficherStatutResto();
                         break;
                     case 2:
                         Console.Clear();
@@ -49,14 +57,14 @@ namespace Projet
 
         void AfficherMenu()
         {
-            Console.WriteLine("1 => Regarder le status du J'A resto");
-            Console.WriteLine("2 => Occuper des différents clients ");
+            Console.WriteLine("1 => Regarder le status de J'A resto");
+            Console.WriteLine("2 => S'Occuper des différents clients ");
             Console.WriteLine("3 => Ajuster le menu");
             Console.WriteLine("4 => Acheter de nouveau plat ");
             Console.WriteLine("5 => Commandes les ingrédients ");
         }
 
-        void OccuperDesClients()
+        void SoccuperDesClients()
         {
 
         }
