@@ -18,17 +18,19 @@ namespace Projet
     public partial class Restaurant
     {
         string Nom {  get; set; }
+        int personneMax { get; set; }
         List<Visiteur> Visiteurs {  get; set; }
         List<Client> Clients { get; set; }
         Menu Menu {  get; set; }
         Status Status { get; set; }
-        public Restaurant(string nom, Status status)
+        public Restaurant(string nom, Status status, int personneMax)
         {
             Nom = nom;
             Visiteurs = new List<Visiteur>();
             Clients = new List<Client>();
             Status = status;
-            Menu= new Menu();
+            Menu = new Menu();
+            this.personneMax = personneMax;
         }
         public void AjouterClient(Client client)
         {
@@ -73,6 +75,28 @@ namespace Projet
                 }
             }
         }
+        public bool AfficherPlein()
+        {
+            bool val;
+            if (Clients.Count + Visiteurs.Count <= personneMax)
+            {
+                val = true;
+            }
+            else
+                val = false;
+
+            return val; 
+        }
+        public void AfficherStatutResto()
+        {
+            if (AfficherPlein())
+            {
+                Console.WriteLine("Encore " + (personneMax - Clients.Count + Visiteurs.Count) + " places.");
+            }
+            else
+                Console.WriteLine("Plein...");
+        }
+
         public override string ToString()
         {
             return "Le restaurant " + Nom + " statut : "+Status+" nombre Clients : "+CompterClient();
