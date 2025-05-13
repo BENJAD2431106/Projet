@@ -17,6 +17,7 @@ namespace Projet
     };
     public partial class Restaurant
     {
+<<<<<<< HEAD
         string Nom {  get; set; }
         int personneMax { get; set; }
         List<Visiteur> Visiteurs {  get; set; }
@@ -24,11 +25,22 @@ namespace Projet
         Menu Menu {  get; set; }
         Status Status { get; set; }
         public List<Ingredient> listIngredients { get; set; }
+=======
+        public string Nom {  get; set; }
+        public int personneMax { get; set; }
+        public List<Visiteur> Visiteurs {  get; set; }
+        public UsineClient UsineClient { get; set; }
+        public List<Client> Clients { get; set; }
+        public Menu Menu {  get; set; }
+        public Status Status { get; set; }
+>>>>>>> 4363d9bcbae3dcdc264b3236b6512d91ce23a120
         public Restaurant(string nom, int personneMax)
         {
             Nom = nom;
             Visiteurs = new List<Visiteur>();
+            UsineClient = new UsineClient();
             Clients = new List<Client>();
+            Menu = new Menu();
             if ((Clients.Count + Visiteurs.Count <= personneMax)&&(Clients.Count + Visiteurs.Count > 0))
             {
                 Status = Status.Dispo;
@@ -80,7 +92,7 @@ namespace Projet
             Console.WriteLine(Menu);
             Console.WriteLine("Écrivez le nom exact du plat que vous voulez.");
             string choix = Console.ReadLine();
-            foreach(Plat plat in  Menu.plats)
+            foreach(Plat plat in  Menu.Plats)
             {
                 if(choix==plat.Nom)
                 {

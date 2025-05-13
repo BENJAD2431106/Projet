@@ -9,18 +9,19 @@ namespace Projet
     public partial class Simulation
     {
         List<Personne> Personnes { get; set; }
-        Menu menu { get; set; }
         Restaurant Restaurant { get; set; }
         Ingredient Ingredient { get; set; }
         List<Ingredient> listIngredients { get; set; }
         List<Plat> listPlats { get; set; }
         List<Client> Clients { get; set; }
+<<<<<<< HEAD
         UsineClient Usine { get; set; } 
+=======
+>>>>>>> 4363d9bcbae3dcdc264b3236b6512d91ce23a120
         public Simulation()
         {
             Restaurant = new Restaurant("J'A Resto", 60);
-            menu = new Menu();
-            Usine = new UsineClient();
+            Clients = new List<Client>();
         }
 
 
@@ -41,11 +42,21 @@ namespace Projet
                         break;
                     case 2:
                         Console.Clear();
+<<<<<<< HEAD
                         Console.WriteLine("Vous avez choisi le choix 2:\n");
                         AfficherMenuClients();
                         Console.Clear();
 
 
+=======
+                        Console.WriteLine("Vous avez choisi le choix 2:");
+                        for (int i = 0; i < 10; i++)
+                        {
+                            Client client = Restaurant.UsineClient.CreerClient();
+                            Restaurant.Clients.Add(client);
+                            Console.WriteLine(client); 
+                        }
+>>>>>>> 4363d9bcbae3dcdc264b3236b6512d91ce23a120
                         break;
                     case 3:
                         Console.Clear();
@@ -87,9 +98,10 @@ namespace Projet
             Console.WriteLine("1 => Regarder le status de J'A resto");
             Console.WriteLine("2 => S'Occuper des différents clients ");
             Console.WriteLine("3 => Ajuster le menu");
-            Console.WriteLine("4 => Acheter de nouveau plat ");
+            Console.WriteLine("4 => Acheter de nouveaux plats ");
             Console.WriteLine("5 => Commandes les ingrédients ");
         }
+<<<<<<< HEAD
 
         void AfficherMenuClients()
         {
@@ -98,5 +110,7 @@ namespace Projet
             Console.WriteLine("3 => Checker les choix des clients");
             Console.WriteLine("4 => Servir les clients");
         }
+=======
+>>>>>>> 4363d9bcbae3dcdc264b3236b6512d91ce23a120
     }
 }
