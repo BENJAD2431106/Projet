@@ -13,15 +13,21 @@ namespace Projet
         Ingredient Ingredient { get; set; }
         List<Ingredient> listIngredients { get; set; }
         List<Plat> listPlats { get; set; }
-        List<Client> Clients { get; set; }
-<<<<<<< HEAD
+        List<Client> listClients { get; set; }
         UsineClient Usine { get; set; } 
-=======
->>>>>>> 4363d9bcbae3dcdc264b3236b6512d91ce23a120
+
         public Simulation()
         {
             Restaurant = new Restaurant("J'A Resto", 60);
-            Clients = new List<Client>();
+            listClients = new List<Client>();
+            
+            for (int i = 0; i < 5; i++)
+            {  
+                listClients.Add(Restaurant.UsineClient.CreerClient());
+            }
+            
+
+
         }
 
 
@@ -37,26 +43,37 @@ namespace Projet
                     case 1:
                         Console.Clear();
                         Console.WriteLine("Vous avez choisi le choix 1:\n");
-                        Restaurant.AfficherStatutResto();
-                        Console.Clear();
+                        Restaurant.AfficherStatutResto();   
                         break;
                     case 2:
                         Console.Clear();
-<<<<<<< HEAD
                         Console.WriteLine("Vous avez choisi le choix 2:\n");
                         AfficherMenuClients();
-                        Console.Clear();
+                        int choixSOccuperClients = Convert.ToInt32(Console.ReadLine());
 
-
-=======
-                        Console.WriteLine("Vous avez choisi le choix 2:");
-                        for (int i = 0; i < 10; i++)
+                        switch (choixSOccuperClients)
                         {
-                            Client client = Restaurant.UsineClient.CreerClient();
-                            Restaurant.Clients.Add(client);
-                            Console.WriteLine(client); 
+                            case 1:
+                                Console.WriteLine("Vous avez ajouté 10 nouveaux clients\n");
+
+                                for (int i = 0; i < 10; i++)
+                                {
+                                    Client client = Restaurant.UsineClient.CreerClient();
+                                    Restaurant.Clients.Add(client);
+                                    listClients.Add(client);
+                                    Console.WriteLine(client);
+                                }
+                                Console.WriteLine();
+                                break;
+                            case 2:
+                                Console.WriteLine("Voici nos clients:\n");
+                                VoirListClients();
+                                Console.WriteLine();
+                                break;
+                            case 3:
+                                break;
                         }
->>>>>>> 4363d9bcbae3dcdc264b3236b6512d91ce23a120
+                        
                         break;
                     case 3:
                         Console.Clear();
@@ -73,7 +90,6 @@ namespace Projet
                                 Console.WriteLine("Quel plat voulez vous supprimer?");
                                 string platSupprimer = Console.ReadLine();
                                 break;
-
                         }
                         break;
                     case 4:
@@ -101,7 +117,6 @@ namespace Projet
             Console.WriteLine("4 => Acheter de nouveaux plats ");
             Console.WriteLine("5 => Commandes les ingrédients ");
         }
-<<<<<<< HEAD
 
         void AfficherMenuClients()
         {
@@ -110,7 +125,13 @@ namespace Projet
             Console.WriteLine("3 => Checker les choix des clients");
             Console.WriteLine("4 => Servir les clients");
         }
-=======
->>>>>>> 4363d9bcbae3dcdc264b3236b6512d91ce23a120
+
+        void VoirListClients()
+        {
+            for (int i = 0; i < listClients.Count; i++)
+            {
+                Console.WriteLine($"{i + 1} => {listClients[i]}");
+            }
+        }
     }
 }

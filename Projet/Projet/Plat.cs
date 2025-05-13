@@ -11,10 +11,10 @@ namespace Projet
         public string Nom {  get; set; }
         public double Prix { get; set; }
         int Rarete   { get; set; }
-        List<Ingredient> Ingredients { get; set; }
+        List<string> Ingredients { get; set; }
         double PrixRecette { get; set; }
 
-        public Plat (string nom, double prix, int rarete, List<Ingredient> ingredients, double prixRecette)
+        public Plat (string nom, double prix, int rarete, List<string> ingredients, double prixRecette)
         {
             Nom = nom;
             Prix = prix;
