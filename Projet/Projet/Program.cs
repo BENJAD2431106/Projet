@@ -5,6 +5,11 @@
         public static Random rand = new Random();
         static void Main(string[] args)
         {
+            //UsineClient usine = new UsineClient();
+            //Client client = usine.CreerClient();
+            //Client client1 = usine.CreerClient();
+            //Client client2 = usine.CreerClient();
+            //Console.WriteLine(client); Console.WriteLine(client2); Console.WriteLine(client1);
             Console.WriteLine("Bienvenue chez J'A Resto !");
             DessinerResto(); 
         }

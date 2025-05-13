@@ -8,12 +8,12 @@ namespace Projet
 {
     public partial class Simulation
     {
-        List <Personne> Personnes { get; set; }
+        List<Personne> Personnes { get; set; }
         Menu menu { get; set; }
         Restaurant Restaurant { get; set; }
-        List <Ingredient> Ingredients { get; set; }
-        List <Client> Clients { get; set; }
-        UsineClient Usine {  get; set; }
+        List<Ingredient> Ingredients { get; set; }
+        List<Client> Clients { get; set; }
+        UsineClient Usine { get; set; }
         public Simulation()
         {
             Restaurant = new Restaurant("J'A Resto", 60);
@@ -21,7 +21,7 @@ namespace Projet
             Usine = new UsineClient();
         }
 
-        
+
         public void LancerSimulation()
         {
             int choix = 0;
@@ -72,7 +72,7 @@ namespace Projet
 
         void SoccuperDesClients()
         {
-           
+
 
         }
 
@@ -81,7 +81,7 @@ namespace Projet
             int nombre = Program.rand.Next(2, 5);
             for (int i = 0; i < nombre; i++)
             {
-                listPieces.Add(new PieceMusique());
+                //listPieces.Add(new PieceMusique());
             }
         }
     }
