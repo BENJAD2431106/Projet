@@ -9,16 +9,13 @@ namespace Projet
     public partial class Simulation
     {
         List<Personne> Personnes { get; set; }
-        Menu menu { get; set; }
         Restaurant Restaurant { get; set; }
         List<Ingredient> Ingredients { get; set; }
         List<Client> Clients { get; set; }
-        UsineClient Usine { get; set; }
         public Simulation()
         {
             Restaurant = new Restaurant("J'A Resto", 60);
-            menu = new Menu();
-            Usine = new UsineClient();
+            Clients = new List<Client>();
         }
 
 
@@ -39,6 +36,12 @@ namespace Projet
                     case 2:
                         Console.Clear();
                         Console.WriteLine("Vous avez choisi le choix 2:");
+                        for (int i = 0; i < 10; i++)
+                        {
+                            Client client = Restaurant.UsineClient.CreerClient();
+                            Restaurant.Clients.Add(client);
+                            Console.WriteLine(client); 
+                        }
                         break;
                     case 3:
                         Console.Clear();
@@ -66,23 +69,8 @@ namespace Projet
             Console.WriteLine("1 => Regarder le status de J'A resto");
             Console.WriteLine("2 => S'Occuper des différents clients ");
             Console.WriteLine("3 => Ajuster le menu");
-            Console.WriteLine("4 => Acheter de nouveau plat ");
+            Console.WriteLine("4 => Acheter de nouveaux plats ");
             Console.WriteLine("5 => Commandes les ingrédients ");
-        }
-
-        void SoccuperDesClients()
-        {
-
-
-        }
-
-        void GenererClients()
-        {
-            int nombre = Program.rand.Next(2, 5);
-            for (int i = 0; i < nombre; i++)
-            {
-                //listPieces.Add(new PieceMusique());
-            }
         }
     }
 }
