@@ -43,6 +43,7 @@
             Console.ReadKey();
             Console.Clear();
 
+            
             Simulation simulation = new Simulation();
             simulation.LancerSimulation();
 

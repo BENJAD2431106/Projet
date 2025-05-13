@@ -23,6 +23,7 @@ namespace Projet
         List<Client> Clients { get; set; }
         Menu Menu {  get; set; }
         Status Status { get; set; }
+        public List<Ingredient> listIngredients { get; set; }
         public Restaurant(string nom, int personneMax)
         {
             Nom = nom;
@@ -42,6 +43,7 @@ namespace Projet
             }
             Menu = new Menu();
             this.personneMax = personneMax;
+            Initialiser();
         }
         public void AjouterClient(Client client)
         {
@@ -106,6 +108,11 @@ namespace Projet
             }
             else
                 Console.WriteLine("Plein...");
+        }
+
+        public void Initialiser()
+        {
+            listIngredients = JsonFileLoader.ChangerFichier<List<Ingredient>>("json_ingredient.json");
         }
 
         public override string ToString()

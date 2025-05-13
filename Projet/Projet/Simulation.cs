@@ -11,9 +11,11 @@ namespace Projet
         List<Personne> Personnes { get; set; }
         Menu menu { get; set; }
         Restaurant Restaurant { get; set; }
-        List<Ingredient> Ingredients { get; set; }
+        Ingredient Ingredient { get; set; }
+        List<Ingredient> listIngredients { get; set; }
+        List<Plat> listPlats { get; set; }
         List<Client> Clients { get; set; }
-        UsineClient Usine { get; set; }
+        UsineClient Usine { get; set; } 
         public Simulation()
         {
             Restaurant = new Restaurant("J'A Resto", 60);
@@ -33,24 +35,43 @@ namespace Projet
                 {
                     case 1:
                         Console.Clear();
-                        Console.WriteLine("Vous avez choisi le choix 1:");
+                        Console.WriteLine("Vous avez choisi le choix 1:\n");
                         Restaurant.AfficherStatutResto();
+                        Console.Clear();
                         break;
                     case 2:
                         Console.Clear();
-                        Console.WriteLine("Vous avez choisi le choix 2:");
+                        Console.WriteLine("Vous avez choisi le choix 2:\n");
+                        AfficherMenuClients();
+                        Console.Clear();
+
+
                         break;
                     case 3:
                         Console.Clear();
-                        Console.WriteLine("Vous avez choisi le choix 3:");
+                        Console.WriteLine("Vous avez choisi le choix 3:\n");
+                        char choixMenu = Console.ReadKey().KeyChar;
+                        Console.WriteLine("Voulez-vous (S)upprimer ou (A)jouter un plat?");
+                        switch (choixMenu)
+                        {
+                            case 'A':
+                                Console.WriteLine("Quel plat voulez vous ajouter?");
+                                string platAjouter = Console.ReadLine();
+                                break;
+                            case 'S':
+                                Console.WriteLine("Quel plat voulez vous supprimer?");
+                                string platSupprimer = Console.ReadLine();
+                                break;
+
+                        }
                         break;
                     case 4:
                         Console.Clear();
-                        Console.WriteLine("Vous avez choisi le choix 4:");
+                        Console.WriteLine("Vous avez choisi le choix 4:\n");
                         break;
                     case 5:
                         Console.Clear();
-                        Console.WriteLine("Vous avez choisi le choix 5:");
+                        Console.WriteLine("Vous avez choisi le choix 5:\n");
                         break;
                     case 6:
                         Environment.Exit(0);
@@ -70,19 +91,12 @@ namespace Projet
             Console.WriteLine("5 => Commandes les ingrédients ");
         }
 
-        void SoccuperDesClients()
+        void AfficherMenuClients()
         {
-
-
-        }
-
-        void GenererClients()
-        {
-            int nombre = Program.rand.Next(2, 5);
-            for (int i = 0; i < nombre; i++)
-            {
-                //listPieces.Add(new PieceMusique());
-            }
+            Console.WriteLine("1 => Ajouter des clients");
+            Console.WriteLine("2 => Voir la liste de clients");
+            Console.WriteLine("3 => Checker les choix des clients");
+            Console.WriteLine("4 => Servir les clients");
         }
     }
 }

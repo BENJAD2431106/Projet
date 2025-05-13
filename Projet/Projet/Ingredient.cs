@@ -21,21 +21,24 @@ namespace Projet
         public int Calorie { get; set; }
         public Qualite QualiteIng { get; set; }
         public float Prix { get; set; }
+        public List<Ingredient> listIngredients { get; set; }
 
         [JsonConstructor]
-        public Ingredient(string nom, int calorie, string quantite, float prix)
+        public Ingredient(string nom, int calorie, string qualite, float prix)
         {
             Nom = nom;
             Calorie = calorie;
-            if (quantite.Contains("Moyenne"))
+            if (qualite.Contains("Moyenne"))
                 QualiteIng = Qualite.Moyen;
-            else if (quantite.Contains("Bonne"))
+            else if (qualite.Contains("Bonne"))
                 QualiteIng = Qualite.Bonne;
             else
                 QualiteIng = Qualite.Excellente;
-            Prix = prix;    
+            Prix = prix;
+            listIngredients = new List<Ingredient>();
         }
 
+       
         public override string ToString()
         {
             return base.ToString();
