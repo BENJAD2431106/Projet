@@ -14,8 +14,10 @@ namespace Projet
         List<Ingredient> listIngredients { get; set; }
         List<Plat> listPlats { get; set; }
         List<Client> listClients { get; set; }
+<<<<<<< HEAD
         UsineClient Usine { get; set; } 
-
+=======
+>>>>>>> 4363d9bcbae3dcdc264b3236b6512d91ce23a120
         public Simulation()
         {
             Restaurant = new Restaurant("J'A Resto", 60);
@@ -49,46 +51,32 @@ namespace Projet
                         Console.Clear();
                         Console.WriteLine("Vous avez choisi le choix 2:\n");
                         AfficherMenuClients();
-                        int choixSOccuperClients = Convert.ToInt32(Console.ReadLine());
+                        Console.Clear();
 
-                        switch (choixSOccuperClients)
+
+=======
+                        Console.WriteLine("Vous avez choisi le choix 2:");
+                        for (int i = 0; i < 10; i++)
                         {
-                            case 1:
-                                Console.WriteLine("Vous avez ajouté 10 nouveaux clients\n");
-
-                                for (int i = 0; i < 10; i++)
-                                {
-                                    Client client = Restaurant.UsineClient.CreerClient();
-                                    Restaurant.Clients.Add(client);
-                                    listClients.Add(client);
-                                    Console.WriteLine(client);
-                                }
-                                Console.WriteLine();
-                                break;
-                            case 2:
-                                Console.WriteLine("Voici nos clients:\n");
-                                VoirListClients();
-                                Console.WriteLine();
-                                break;
-                            case 3:
-                                break;
+                            Client client = Restaurant.UsineClient.CreerClient();
+                            Restaurant.Clients.Add(client);
+                            Console.WriteLine(client); 
                         }
-                        
+>>>>>>> 4363d9bcbae3dcdc264b3236b6512d91ce23a120
                         break;
                     case 3:
-                        Console.Clear();
                         Console.WriteLine("Vous avez choisi le choix 3:\n");
-                        char choixMenu = Console.ReadKey().KeyChar;
+                        
                         Console.WriteLine("Voulez-vous (S)upprimer ou (A)jouter un plat?");
+                        char choixMenu = Console.ReadKey().KeyChar;
+                        Console.WriteLine();
                         switch (choixMenu)
                         {
                             case 'A':
-                                Console.WriteLine("Quel plat voulez vous ajouter?");
-                                string platAjouter = Console.ReadLine();
+                                Restaurant.AfficherChangementAjout();
                                 break;
                             case 'S':
-                                Console.WriteLine("Quel plat voulez vous supprimer?");
-                                string platSupprimer = Console.ReadLine();
+                                Restaurant.AfficherChangementSupp();
                                 break;
                         }
                         break;
@@ -117,6 +105,7 @@ namespace Projet
             Console.WriteLine("4 => Acheter de nouveaux plats ");
             Console.WriteLine("5 => Commandes les ingrédients ");
         }
+<<<<<<< HEAD
 
         void AfficherMenuClients()
         {
@@ -125,13 +114,7 @@ namespace Projet
             Console.WriteLine("3 => Checker les choix des clients");
             Console.WriteLine("4 => Servir les clients");
         }
-
-        void VoirListClients()
-        {
-            for (int i = 0; i < listClients.Count; i++)
-            {
-                Console.WriteLine($"{i + 1} => {listClients[i]}");
-            }
-        }
+=======
+>>>>>>> 4363d9bcbae3dcdc264b3236b6512d91ce23a120
     }
 }

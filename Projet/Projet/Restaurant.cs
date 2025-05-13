@@ -17,6 +17,7 @@ namespace Projet
     };
     public partial class Restaurant
     {
+        public List<Ingredient> listIngredients { get; set; }
         public string Nom {  get; set; }
         public int personneMax { get; set; }
         public List<Visiteur> Visiteurs {  get; set; }
@@ -24,9 +25,6 @@ namespace Projet
         public List<Client> Clients { get; set; }
         public Menu Menu {  get; set; }
         public Status Status { get; set; }
-        public List<Ingredient> listIngredients { get; set; }
-
-
         public Restaurant(string nom, int personneMax)
         {
             Nom = nom;
@@ -81,6 +79,34 @@ namespace Projet
                 nombrePers++;
             }
             return nombrePers;
+        }
+        public void AfficherChangementSupp()
+        {
+            Console.WriteLine(Menu);
+            Console.WriteLine("Écrivez le nom exact du plat que vous voulez Supprimer.");
+            string choix = Console.ReadLine();
+            foreach (Plat plat in Menu.Plats)
+            {
+                if (choix == plat.Nom)
+                {
+                    Console.WriteLine("Vous avez choisi " + choix);
+                    plat.Disponibilite = Disponibilite.Indispo;
+                }
+            }
+        }
+        public void AfficherChangementAjout()
+        {
+            Console.WriteLine(Menu);
+            Console.WriteLine("Écrivez le nom exact du plat que vous voulez ajouter.");
+            string choix = Console.ReadLine();
+            foreach (Plat plat in Menu.Plats)
+            {
+                if (choix == plat.Nom)
+                {
+                    Console.WriteLine("Vous avez choisi " + choix);
+                    plat.Disponibilite = Disponibilite.Dispo;
+                }
+            }
         }
         public void AfficherChoixClient()
         {

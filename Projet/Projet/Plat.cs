@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace Projet
 {
+    public enum Disponibilite
+    {
+        Dispo,
+        Indispo
+    }
     public partial class Plat
     {
         public string Nom {  get; set; }
@@ -13,14 +18,15 @@ namespace Projet
         int Rarete   { get; set; }
         List<string> Ingredients { get; set; }
         double PrixRecette { get; set; }
-
-        public Plat (string nom, double prix, int rarete, List<string> ingredients, double prixRecette)
+        public Disponibilite Disponibilite { get; set; }
+        public Plat (string nom, double prix, int rarete, List<string> ingredients, double prixRecette, Disponibilite disponibilite)
         {
             Nom = nom;
             Prix = prix;
-            Rarete = Rarete;
+            Rarete = rarete;
             Ingredients = ingredients;
             PrixRecette = prixRecette;
+            Disponibilite = disponibilite;
         }
 
         public string GetInfoIngr()
@@ -37,7 +43,7 @@ namespace Projet
 
         public override string ToString()
         {
-            return $"Plat; {Nom} {Prix}$ \n Rareté: {Rarete}/10\n Les ingrédients: {GetInfoIngr()}\n Prix d'achat(Recette) : {PrixRecette} \n";
+            return $"Plat; {Nom} {Prix}$ \n Rareté: {Rarete}/10\n Les ingrédients: {GetInfoIngr()}\n Prix d'achat(Recette) : {PrixRecette} Disponibilité : {Disponibilite}\n";
         }
     }
 }
