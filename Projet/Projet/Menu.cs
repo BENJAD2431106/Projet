@@ -71,12 +71,10 @@ namespace Projet
         public override string ToString()
         {
             string info = "";
-            int cpt = 0;
             info += "Menu J'A Resto\n";
             foreach (var plat in Plats)
             {
-                    cpt++;
-                    info += cpt + "" + plat + "\n";
+                    info += plat + "\n";
             }
             return info;
         }

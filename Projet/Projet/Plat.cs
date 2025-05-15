@@ -43,7 +43,7 @@ namespace Projet
 
         public override string ToString()
         {
-            return $"Plat; {Nom} {Prix}$ \n Rareté: {Rarete}/10\n Les ingrédients: {GetInfoIngr()}\n Prix d'achat(Recette) : {PrixRecette} Disponibilité : {Disponibilite}\n";
+            return $"{Nom} {Prix}$ Rareté: {Rarete}/10\n Les ingrédients: {GetInfoIngr()}\n Prix d'achat(Recette) : {PrixRecette} Disponibilité : {Disponibilite}\n";
         }
     }
 }

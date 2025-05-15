@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,65 +9,53 @@ namespace Projet
 {
     public partial class Simulation
     {
+        Random rand = new Random();
         List<Personne> Personnes { get; set; }
         Restaurant Restaurant { get; set; }
-        Ingredient Ingredient { get; set; }
-        List<Ingredient> listIngredients { get; set; }
-        List<Plat> listPlats { get; set; }
         List<Client> listClients { get; set; }
-<<<<<<< HEAD
-        UsineClient Usine { get; set; } 
-=======
->>>>>>> 4363d9bcbae3dcdc264b3236b6512d91ce23a120
+        UsineClient Usine { get; set; }
         public Simulation()
         {
-            Restaurant = new Restaurant("J'A Resto", 60);
+            Restaurant = new Restaurant("J'A Resto", 60, 100); //début capital de 100
             listClients = new List<Client>();
-            
+
             for (int i = 0; i < 5; i++)
-            {  
+            {
                 listClients.Add(Restaurant.UsineClient.CreerClient());
             }
-            
-
-
         }
-
-
         public void LancerSimulation()
         {
             int choix = 0;
             do
             {
                 AfficherMenu();
-                choix = Convert.ToInt32(Console.ReadLine());
+                try { choix = Convert.ToInt32(Console.ReadLine()); throw new Exception("Entrez un entier svp."); }
+                catch (Exception e) { Console.WriteLine(e.Message); }
+
                 switch (choix)
                 {
                     case 1:
                         Console.Clear();
                         Console.WriteLine("Vous avez choisi le choix 1:\n");
-                        Restaurant.AfficherStatutResto();   
+                        Restaurant.AfficherStatutResto();
                         break;
                     case 2:
                         Console.Clear();
                         Console.WriteLine("Vous avez choisi le choix 2:\n");
                         AfficherMenuClients();
                         Console.Clear();
-
-
-=======
                         Console.WriteLine("Vous avez choisi le choix 2:");
                         for (int i = 0; i < 10; i++)
                         {
                             Client client = Restaurant.UsineClient.CreerClient();
                             Restaurant.Clients.Add(client);
-                            Console.WriteLine(client); 
+                            Console.WriteLine(client);
                         }
->>>>>>> 4363d9bcbae3dcdc264b3236b6512d91ce23a120
                         break;
                     case 3:
                         Console.WriteLine("Vous avez choisi le choix 3:\n");
-                        
+                        Console.WriteLine("Voici vos plats :" + Restaurant.Menu);
                         Console.WriteLine("Voulez-vous (S)upprimer ou (A)jouter un plat?");
                         char choixMenu = Console.ReadKey().KeyChar;
                         Console.WriteLine();
@@ -82,11 +71,20 @@ namespace Projet
                         break;
                     case 4:
                         Console.Clear();
-                        Console.WriteLine("Vous avez choisi le choix 4:\n");
+                        Console.WriteLine("Vous avez choisi le choix 4: Achat de nouveaux plats.\n");
+                        Console.WriteLine("Entrer le nom du plat");
+                        string platChoix = Console.ReadLine();
+                        Console.WriteLine("Entrez l'ingrédient principal pour ce plat.");
+                        string ingred = Console.ReadLine();
+                        Plat plat = TrouverIngredient(platChoix, ingred);
+                        Console.WriteLine("Votre menu présentement : " + Restaurant.Menu);
                         break;
                     case 5:
                         Console.Clear();
                         Console.WriteLine("Vous avez choisi le choix 5:\n");
+                        Console.WriteLine("Commander Quel ingrédient?");
+                        string ingredientChoix = Console.ReadLine();
+                        AcheterIngredients(ingredientChoix);
                         break;
                     case 6:
                         Environment.Exit(0);
@@ -105,7 +103,6 @@ namespace Projet
             Console.WriteLine("4 => Acheter de nouveaux plats ");
             Console.WriteLine("5 => Commandes les ingrédients ");
         }
-<<<<<<< HEAD
 
         void AfficherMenuClients()
         {
@@ -114,7 +111,36 @@ namespace Projet
             Console.WriteLine("3 => Checker les choix des clients");
             Console.WriteLine("4 => Servir les clients");
         }
-=======
->>>>>>> 4363d9bcbae3dcdc264b3236b6512d91ce23a120
+
+        Plat TrouverIngredient(string plat, string ingredient)
+        {
+            foreach (var item in Restaurant.listIngredients)
+            {
+                if (ingredient == item.Nom)
+                {
+                    Restaurant.Menu.AjouterPlat(new Plat(plat, rand.Next(12, 25), rand.Next(11), [ingredient], rand.Next(5, 12), Disponibilite.Dispo));
+                    return new Plat(plat, rand.Next(12, 25), rand.Next(11), [ingredient], rand.Next(5, 12), Disponibilite.Dispo);
+                }
+            }
+            Console.WriteLine("Ingrédient indisponible.");
+            Console.WriteLine("Dirigez-vous plutot vers l'interface d'achat d'ingrédients.");
+            return null;
+        }
+        void AcheterIngredients(string ingr)
+        {
+            try
+            {
+                Ingredient ingredient = new Ingredient(ingr, rand.Next(1, 150), "Bonne", rand.Next(1, 6));
+                Restaurant.listIngredients.Add(ingredient);
+                Restaurant.Argent -= ingredient.Prix;
+                if(Restaurant.Argent < ingredient.Prix)
+                    throw new Exception("Pas d'argent !");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
     }
 }
+

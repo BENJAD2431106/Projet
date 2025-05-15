@@ -20,13 +20,15 @@ namespace Projet
         public List<Ingredient> listIngredients { get; set; }
         public string Nom {  get; set; }
         public int personneMax { get; set; }
+        public double Argent {  get; set; }
         public List<Visiteur> Visiteurs {  get; set; }
         public UsineClient UsineClient { get; set; }
         public List<Client> Clients { get; set; }
         public Menu Menu {  get; set; }
         public Status Status { get; set; }
-        public Restaurant(string nom, int personneMax)
+        public Restaurant(string nom, int personneMax, double argent)
         {
+            Argent = argent;
             Nom = nom;
             Visiteurs = new List<Visiteur>();
             UsineClient = new UsineClient();
@@ -135,6 +137,12 @@ namespace Projet
         }
         public void AfficherStatutResto()
         {
+            Console.WriteLine("Restaurant "+Nom+" capacité maximale de clients "+personneMax+" Les ingrédients actuellement Disponibles :");
+            foreach(var item in listIngredients)
+            {
+                Console.WriteLine(item);
+            }
+            
             if (AfficherPlein())
             {
                 Console.WriteLine("Encore " + (personneMax - Clients.Count + Visiteurs.Count) + " places.");

@@ -18,16 +18,16 @@ namespace Projet
 
     {
         public string Nom { get; set; }
-        public int Calorie { get; set; }
+        public int Calories { get; set; }
         public Qualite QualiteIng { get; set; }
         public float Prix { get; set; }
         public List<Ingredient> listIngredients { get; set; }
 
         [JsonConstructor]
-        public Ingredient(string nom, int calorie, string qualite, float prix)
+        public Ingredient(string nom, int calories, string qualite, float prix)
         {
             Nom = nom;
-            Calorie = calorie;
+            Calories = calories;
             if (qualite.Contains("Moyenne"))
                 QualiteIng = Qualite.Moyen;
             else if (qualite.Contains("Bonne"))
@@ -41,7 +41,7 @@ namespace Projet
        
         public override string ToString()
         {
-            return base.ToString();
+            return Nom + " " + QualiteIng + " Cals : " + Calories + " & Prix : " + Prix;
         }
     }
 }
