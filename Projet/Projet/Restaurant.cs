@@ -139,7 +139,7 @@ namespace Projet
         }
         public void AfficherStatutResto()
         {
-            Console.WriteLine("Restaurant "+Nom+" capacité maximale de clients "+personneMax+" Les ingrédients actuellement Disponibles :");
+            Console.WriteLine("Restaurant "+Nom+" capacité maximale de clients "+personneMax+"\nLes ingrédients actuellement Disponibles :");
             foreach(var item in listIngredients)
             {
                 Console.WriteLine(item);
@@ -160,7 +160,7 @@ namespace Projet
 
         public override string ToString()
         {
-            return "Le restaurant " + Nom + " statut : "+Status+" nombre Clients : "+CompterClient();
+            return "Le restaurant " + Nom + "\nstatut : "+Status+" nombre Clients : "+CompterClient();
         }
     }
 }
