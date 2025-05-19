@@ -9,8 +9,8 @@ namespace Projet
 
     public partial class Personne
     {
-        string Nom {  get; set; }
-        string Prenom { get; set; }
+        public string Nom {  get; set; }
+        public string Prenom { get; set; }
         
         public Personne(string nom, string prenom)
         {

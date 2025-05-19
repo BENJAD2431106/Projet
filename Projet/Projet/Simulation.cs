@@ -27,11 +27,16 @@ namespace Projet
         public void LancerSimulation()
         {
             int choix = 0;
+            int choix1 = 0;
             do
             {
                 AfficherMenu();
-                try { choix = Convert.ToInt32(Console.ReadLine()); throw new Exception("Entrez un entier svp."); }
-                catch (Exception e) { Console.WriteLine(e.Message); }
+                string input = Console.ReadLine();
+                try
+                {
+                    choix = Convert.ToInt32(input);
+                }
+                catch (FormatException) { Console.WriteLine("Entrez un entier svp."); }
 
                 switch (choix)
                 {
@@ -41,17 +46,68 @@ namespace Projet
                         Restaurant.AfficherStatutResto();
                         break;
                     case 2:
-                        Console.Clear();
-                        Console.WriteLine("Vous avez choisi le choix 2:\n");
-                        AfficherMenuClients();
-                        Console.Clear();
-                        Console.WriteLine("Vous avez choisi le choix 2:");
-                        for (int i = 0; i < 10; i++)
+                        do
                         {
-                            Client client = Restaurant.UsineClient.CreerClient();
-                            Restaurant.Clients.Add(client);
-                            Console.WriteLine(client);
-                        }
+                            Console.WriteLine("Vous avez choisi le choix 2:\n");
+                            AfficherMenuClients();
+                            string input1 = Console.ReadLine();
+                            try
+                            {
+                                choix1 = Convert.ToInt32(input1);
+                            }
+                            catch (FormatException) { Console.WriteLine("Entrez un entier svp."); }
+                            switch (choix1)
+                            {
+                                case 1:
+                                    Console.WriteLine("Vous avez choisi le choix 1:\n");
+                                    for (int i = 0; i < 10; i++)
+                                    {
+                                        Client client = Restaurant.UsineClient.CreerClient();
+                                        Restaurant.Clients.Add(client);
+                                        Console.WriteLine(client);
+                                    }
+                                    break;
+                                case 2:
+                                    Console.WriteLine("Vous avez choisi le choix 2:\n");
+                                    foreach(var  client in Restaurant.Clients)
+                                    {
+                                        Facture facture = new Facture(client, Restaurant.Menu.Plats[rand.Next(Restaurant.Menu.Plats.Count)]);
+                                        Restaurant.Factures.Add(facture);
+                                    }
+                                    break;
+                                case 3:
+                                    Console.WriteLine("Vous avez choisi le choix 3:\nVoici les Clients et leur choix.");
+                                    foreach(var fac in Restaurant.Factures)
+                                    {
+                                        Console.WriteLine(fac);
+                                    }
+                                    break;
+                                case 4:
+                                    Console.WriteLine("Vous avez choisi le choix 1:\n");
+                                    for (int i = 0; i < 10; i++)
+                                    {
+                                        Client client = Restaurant.UsineClient.CreerClient();
+                                        Restaurant.Clients.Add(client);
+                                        Console.WriteLine(client);
+                                    }
+                                    break;
+                                case 5:
+                                    Console.WriteLine("Vous avez choisi le choix 5:\nLe nom prénom exact du client.");
+                                    string reponseClient = Console.ReadLine();
+                                    foreach (var client in Restaurant.Clients)
+                                    {
+                                        if (reponseClient == client.Nom)
+                                        {
+                                            Restaurant.Clients.Remove(client);
+                                            Console.WriteLine(client.Nom+" sorti.");
+                                        }
+                                    }
+
+                                    break;
+                            }
+
+
+                        } while (choix != 5);
                         break;
                     case 3:
                         Console.WriteLine("Vous avez choisi le choix 3:\n");
@@ -107,9 +163,10 @@ namespace Projet
         void AfficherMenuClients()
         {
             Console.WriteLine("1 => Ajouter des clients");
-            Console.WriteLine("2 => Voir la liste de clients");
+            Console.WriteLine("2 => Servir les clients");
             Console.WriteLine("3 => Checker les choix des clients");
-            Console.WriteLine("4 => Servir les clients");
+            Console.WriteLine("4 => Servir un client particulier");
+            Console.WriteLine("5 => Faire Quitter un client");
         }
 
         Plat TrouverIngredient(string plat, string ingredient)
@@ -133,7 +190,7 @@ namespace Projet
                 Ingredient ingredient = new Ingredient(ingr, rand.Next(1, 150), "Bonne", rand.Next(1, 6));
                 Restaurant.listIngredients.Add(ingredient);
                 Restaurant.Argent -= ingredient.Prix;
-                if(Restaurant.Argent < ingredient.Prix)
+                if (Restaurant.Argent < ingredient.Prix)
                     throw new Exception("Pas d'argent !");
             }
             catch (Exception ex)

@@ -21,6 +21,7 @@ namespace Projet
         public string Nom {  get; set; }
         public int personneMax { get; set; }
         public double Argent {  get; set; }
+        public List <Facture> Factures { get; set; }
         public List<Visiteur> Visiteurs {  get; set; }
         public UsineClient UsineClient { get; set; }
         public List<Client> Clients { get; set; }
@@ -30,6 +31,7 @@ namespace Projet
         {
             Argent = argent;
             Nom = nom;
+            Factures = new List<Facture>();
             Visiteurs = new List<Visiteur>();
             UsineClient = new UsineClient();
             Clients = new List<Client>();
