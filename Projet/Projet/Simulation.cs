@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ namespace Projet
 {
     public partial class Simulation
     {
+        //tryy catch si resto plein pour ajouter des clients.
         Random rand = new Random();
         List<Personne> Personnes { get; set; }
         Restaurant Restaurant { get; set; }
@@ -55,7 +57,6 @@ namespace Projet
                     case 2:
                         do
                         {
-                            Console.Clear();
                             Console.WriteLine("Vous avez choisi le choix 2:\n");
                             AfficherMenuClients();
                             string input1 = Console.ReadLine();
@@ -95,11 +96,29 @@ namespace Projet
                                 case 4:
                                     Console.Clear();
                                     Console.WriteLine("Vous avez choisi le choix 4:\n");
-                                    for (int i = 0; i < 10; i++)
+                                    Console.WriteLine("Quel client servir ?(Donnez prenom)");
+                                    string prenomCli=Console.ReadLine();
+                                    Console.WriteLine("Quel client servir ?(Donnez nom)");
+                                    string nomCli=Console.ReadLine();   
+                                    Console.WriteLine("Quel plat?");
+                                    string platCli=Console.ReadLine();
+                                    foreach(Plat pl in Restaurant.Menu.Plats)
                                     {
-                                        Client client = Restaurant.UsineClient.CreerClient();
-                                        Restaurant.Clients.Add(client);
-                                        Console.WriteLine(client);
+                                        foreach (Client client in Restaurant.Clients)
+                                        {
+                                            try
+                                            {
+                                                if (client.Nom == nomCli && client.Prenom == prenomCli && pl.Nom == platCli)
+                                                {
+
+                                                    if (pl.Disponibilite == Disponibilite.Indispo)
+                                                        throw new Exception("Plat Indisponible rendez-le dispo....");
+                                                    Facture facture = new Facture(client, pl);
+                                                    Console.WriteLine(client.Nom + " " + client.Prenom + " prends " + pl.Nom);
+                                                }
+                                            }
+                                            catch (Exception ex) { Console.WriteLine(ex.Message); }
+                                        }
                                     }
                                     break;
                                 case 5:
