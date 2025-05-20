@@ -70,73 +70,82 @@ namespace Projet
                                 case 1:
                                     Console.Clear();
                                     Console.WriteLine("Vous avez choisi le choix 1:\n");
-                                    for (int i = 0; i < 10; i++)
+                                    try
                                     {
-                                        Client client = Restaurant.UsineClient.CreerClient();
-                                        Restaurant.Clients.Add(client);
-                                        Console.WriteLine(client);
-                                    }
-                                    break;
-                                case 2:
-                                    Console.Clear();
-                                    Console.WriteLine("Vous avez choisi le choix 2:\n");
-                                    foreach(var  client in Restaurant.Clients)
-                                    {
-                                        Facture facture = new Facture(client, Restaurant.Menu.Plats[rand.Next(Restaurant.Menu.Plats.Count)]);
-                                        Restaurant.Factures.Add(facture);
-                                    }
-                                    break;
-                                case 3:
-                                    Console.WriteLine("Vous avez choisi le choix 3:\nVoici les Clients et leur choix.");
-                                    foreach(var fac in Restaurant.Factures)
-                                    {
-                                        Console.WriteLine(fac);
-                                    }
-                                    break;
-                                case 4:
-                                    Console.Clear();
-                                    Console.WriteLine("Vous avez choisi le choix 4:\n");
-                                    Console.WriteLine("Quel client servir ?(Donnez prenom)");
-                                    string prenomCli=Console.ReadLine();
-                                    Console.WriteLine("Quel client servir ?(Donnez nom)");
-                                    string nomCli=Console.ReadLine();   
-                                    Console.WriteLine("Quel plat?");
-                                    string platCli=Console.ReadLine();
-                                    foreach(Plat pl in Restaurant.Menu.Plats)
-                                    {
-                                        foreach (Client client in Restaurant.Clients)
+                                        if (Restaurant.Clients.Count <= Restaurant.personneMax)
                                         {
-                                            try
+                                            for (int i = 0; i < 10; i++)
                                             {
-                                                if (client.Nom == nomCli && client.Prenom == prenomCli && pl.Nom == platCli)
-                                                {
-
-                                                    if (pl.Disponibilite == Disponibilite.Indispo)
-                                                        throw new Exception("Plat Indisponible rendez-le dispo....");
-                                                    Facture facture = new Facture(client, pl);
-                                                    Console.WriteLine(client.Nom + " " + client.Prenom + " prends " + pl.Nom);
-                                                }
+                                                Client client = Restaurant.UsineClient.CreerClient();
+                                                Restaurant.Clients.Add(client);
+                                                Console.WriteLine(client);
                                             }
-                                            catch (Exception ex) { Console.WriteLine(ex.Message); }
                                         }
+                                        else
+                                            throw new Exception("Il ne reste plus de places dans resto");
                                     }
-                                    break;
-                                case 5:
-                                    Console.Clear();
-                                    Console.WriteLine("Vous avez choisi le choix 5:\nLe nom prénom exact du client.");
-                                    string reponseClient = Console.ReadLine();
-                                    foreach (var client in Restaurant.Clients)
+                                    catch (Exception ex) { Console.WriteLine(ex.Message); }
+                            break;
+                                case 2:
+                                Console.Clear();
+                                Console.WriteLine("Vous avez choisi le choix 2:\n");
+                                foreach (var client in Restaurant.Clients)
+                                {
+                                    Facture facture = new Facture(client, Restaurant.Menu.Plats[rand.Next(Restaurant.Menu.Plats.Count)]);
+                                    Restaurant.Factures.Add(facture);
+                                }
+                                break;
+                            case 3:
+                                Console.WriteLine("Vous avez choisi le choix 3:\nVoici les Clients et leur choix.");
+                                foreach (var fac in Restaurant.Factures)
+                                {
+                                    Console.WriteLine(fac);
+                                }
+                                break;
+                            case 4:
+                                Console.Clear();
+                                Console.WriteLine("Vous avez choisi le choix 4:\n");
+                                Console.WriteLine("Quel client servir ?(Donnez prenom)");
+                                string prenomCli = Console.ReadLine();
+                                Console.WriteLine("Quel client servir ?(Donnez nom)");
+                                string nomCli = Console.ReadLine();
+                                Console.WriteLine("Quel plat?");
+                                string platCli = Console.ReadLine();
+                                foreach (Plat pl in Restaurant.Menu.Plats)
+                                {
+                                    foreach (Client client in Restaurant.Clients)
                                     {
-                                        if (reponseClient == client.Nom)
+                                        try
                                         {
-                                            Restaurant.Clients.Remove(client);
-                                            Console.WriteLine(client.Nom+" sorti.");
+                                            if (client.Nom == nomCli && client.Prenom == prenomCli && pl.Nom == platCli)
+                                            {
+
+                                                if (pl.Disponibilite == Disponibilite.Indispo)
+                                                    throw new Exception("Plat Indisponible rendez-le dispo....");
+                                                Facture facture = new Facture(client, pl);
+                                                Console.WriteLine(client.Nom + " " + client.Prenom + " prends " + pl.Nom);
+                                            }
                                         }
+                                        catch (Exception ex) { Console.WriteLine(ex.Message); }
                                     }
-                                    break;
-                                case 6:
-                                    Console.Clear();
-                                    break;
+                                }
+                                break;
+                            case 5:
+                                Console.Clear();
+                                Console.WriteLine("Vous avez choisi le choix 5:\nLe nom prénom exact du client.");
+                                string reponseClient = Console.ReadLine();
+                                foreach (var client in Restaurant.Clients)
+                                {
+                                    if (reponseClient == client.Nom)
+                                    {
+                                        Restaurant.Clients.Remove(client);
+                                        Console.WriteLine(client.Nom + " sorti.");
+                                    }
+                                }
+                                break;
+                            case 6:
+                                Console.Clear();
+                                break;
                             }
                         } while (choix1 != 6);
                         break;
@@ -188,7 +197,7 @@ namespace Projet
                         double salaireEmplo = double.Parse(Console.ReadLine());
                         listEmploye.Add(new Employe(nomEmplo, prenomEmplo, salaireEmplo));
                         Console.WriteLine();
-                        
+
                         Console.WriteLine($"Bravo! Maintentant J'A Resto a {listEmploye.Count} employé(es)");
                         Console.WriteLine($"Wow! Votre nouveau employé(e) {nomEmplo} vous amene le nouveau bonus!\n");
                         DonnerBonus();

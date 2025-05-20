@@ -61,8 +61,11 @@ namespace Billard
                     case 4:
                         EssayerJeu();
                         break;
+                    case 5:
+                        Environment.Exit(0);
+                        break;
                 }
-            } while (choix1 != 4);
+            } while (choix1 != 5);
         }
         public void EssayerJeu()
         {
@@ -93,12 +96,12 @@ namespace Billard
                     {
                         Console.WriteLine("Tentative de rentrer la boule " + boule.Numero + " échouée");
                     }
-
                 }
+                
             }
+            Console.ReadLine();
             /////////////faire tour par tour 
             ///arranger aaffaire catPoids
-            ///dans projet faire menu quitter
             Console.WriteLine("Tour de Ordi :");
             foreach (Boule boule in Boules)
             {
@@ -126,6 +129,7 @@ namespace Billard
 
                 }
             }
+            Console.ReadLine();
         }
         public bool VerifierNoire()
         {
@@ -195,6 +199,7 @@ namespace Billard
             Console.WriteLine("2 => Visualiser votre joueur.");
             Console.WriteLine("3 => Regarder le nombre de boules totales Rentrées.");
             Console.WriteLine("4 => Jouer.");
+            Console.WriteLine("5 => Quitter.");
         }
     }
 }
