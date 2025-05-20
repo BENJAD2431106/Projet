@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Billard
 {
-    internal class Trou
+    public class Trou
     {
     }
 }
