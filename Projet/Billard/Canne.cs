@@ -35,6 +35,7 @@ namespace Billard
             Visee = visee;
             Force = force;
             Masse = poids;
+            DeterminerCategorie();
         }
         public void DeterminerCategorie()
         {
@@ -42,7 +43,7 @@ namespace Billard
             {
                 CatPoids = Poids.Léger;
             }
-            else if (Masse < 15 && Masse < 30)
+            else if (Masse >= 15 && Masse < 30)
             {
                 CatPoids = Poids.Moyen;
             }

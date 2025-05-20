@@ -69,68 +69,109 @@ namespace Billard
         }
         public void EssayerJeu()
         {
-            Joueur ordi = new Joueur();
-            int numero = rand.Next(1, 16);
-            int cpt = 1;
-            int no = rand.Next(1, 3);
-            foreach (Boule boule in Boules)
+            Joueur ordi = new Joueur("Ordi");
+            int cpt = 0;
+            int cpt1 = 0;
+            bool sortir = true;
+            while (sortir)
             {
-                if (!VerifierNoire() && boule.Numero == 8)
+                int no = rand.Next(1, 3);
+                int numero = rand.Next(1, 16);
+                Boule boule = null;
+                foreach (Boule b in Boules)
                 {
-                    Console.WriteLine("Vous avez PERDU... " + Joueur.Nom + " a rentrée la " + boule.Type);
-                    break;
-                }
-                else if (numero == boule.Numero && boule.Statut == Statut.Dispo)
-                {
-                    if(boule.Numero==8)
+                    if (b.Numero == numero && b.Statut == Statut.Dispo)
                     {
-                        Console.WriteLine("Vous avez GAGNÉ!!! " + Joueur.Nom + " a rentrée la " + boule.Type);
-                    }
-                    if (no == 2)
-                    {
-                        Console.WriteLine("Boule " + boule.Numero + " rentrée par " + Joueur.Nom);
-                        boule.Statut = Statut.Rentree;
-                        cpt++;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Tentative de rentrer la boule " + boule.Numero + " échouée");
+                        boule = b;
+                        break; // On a trouvé la bonne boule, on quitte la boucle
                     }
                 }
-                
-            }
-            Console.ReadLine();
-            /////////////faire tour par tour 
-            ///arranger aaffaire catPoids
-            Console.WriteLine("Tour de Ordi :");
-            foreach (Boule boule in Boules)
-            {
-                if (!VerifierNoire() && boule.Numero == 8)
+                Console.WriteLine("Tour de : " + Joueur.Nom);
+                if (boule is null)
                 {
-                    if (boule.Numero == 8)
-                    {
-                        Console.WriteLine("Vous avez PERDU... " + ordi.Nom + " a rentrée la " + boule.Type);
-                    }
-                    break;
+                    Console.WriteLine("Aucne boule à jouer.");
                 }
-                else if (numero == boule.Numero && boule.Statut == Statut.Dispo)
+                else if (boule != null)
                 {
-                    Console.WriteLine("Vous avez perdu... " + Joueur.Nom + " a rentrée la " + boule.Type);
-                    if (no == 2)
+                    if (!VerifierNoire() && boule.Numero == 8)
                     {
-                        Console.WriteLine("Boule " + boule.Numero + " rentrée par " + ordi.Nom);
-                        boule.Statut = Statut.Rentree;
-                        cpt++;
+                        Console.WriteLine("Vous avez PERDU... " + Joueur.Nom + " a rentré la " + boule.Type);
+                        sortir = false;
+                        break;
                     }
-                    else
+                    else if (boule.Numero == 8 && VerifierNoire())
                     {
-                        Console.WriteLine("Tentative de rentrer la boule " + boule.Numero + " échouée");
+                        Console.WriteLine("Vous avez GAGNÉ !!! " + Joueur.Nom + " a rentré la noire !");
+                        sortir = false;
+                        break;
                     }
+                    else if (boule.Statut == Statut.Dispo)
+                    {
+                        if (no == 2)
+                        {
+                            Console.WriteLine("Boule " + boule.Numero + " rentrée par " + Joueur.Nom);
+                            boule.Statut = Statut.Rentree;
+                            cpt++;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Tentative de rentrer la boule " + boule.Numero + " échouée");
+                        }
+                    }
+                }
+                Console.ReadLine();
+                Console.WriteLine("Tour de Ordi :");
+                int no1 = rand.Next(1, 3);
+                int numero1 = rand.Next(1, 16);
+                boule = null;
+                foreach (Boule b in Boules)
+                {
+                    if (b.Numero == numero1 && b.Statut == Statut.Dispo)
+                    {
+                        boule = b;
+                        break; // On a trouvé la bonne boule, on quitte la boucle
+                    }
+                }
+                if(boule is null)
+                {
+                    Console.WriteLine("Aucne boule à jouer.");
+                }
+                else if (boule != null)
+                {
+                    if (!VerifierNoire() && boule.Numero == 8)
+                    {
+                        Console.WriteLine("Vous avez GAGNÉ... " + ordi.Nom + " a rentré la " + boule.Type);
+                        sortir = false;
+                        break;
+                    }
+                    else if (boule.Numero == 8 && VerifierNoire())
+                    {
+                        Console.WriteLine("Vous avez GAGNÉ !!! " + Joueur.Nom + " a rentré la noire !");
+                        sortir = false;
+                        break;
+                    }
+                    else if (boule.Statut == Statut.Dispo)
+                    {
+                        if (no1 == 2)
+                        {
+                            Console.WriteLine("Boule " + boule.Numero + " rentrée par " + ordi.Nom);
+                            boule.Statut = Statut.Rentree;
+                            cpt1++;
+                            sortir = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Tentative de rentrer la boule " + boule.Numero + " échouée");
+                        }
 
+                    }
                 }
+                Console.ReadLine();
             }
             Console.ReadLine();
+            Console.WriteLine(cpt+" boules rentrées par "+Joueur.Nom+" , et "+cpt1+" boules rentrées par "+ordi.Nom);
         }
+
         public bool VerifierNoire()
         {
             bool rentree = false;
@@ -173,7 +214,6 @@ namespace Billard
                 case 1:
                     Console.WriteLine("Vous avez choisi le choix 1:\n");
                     return new Joueur();
-                    break;
                 case 2:
                     Console.WriteLine("Vous avez choisi le choix 2:\n");
                     Console.WriteLine("Quel nom attribuer à votre joueur.");
@@ -188,7 +228,6 @@ namespace Billard
                     int force = Convert.ToInt32(Console.ReadLine());
                     Canne canne = new Canne(nomCanne, visee, force, poids);
                     return new Joueur(nom, canne);
-                    break;
             }
             return null;
         }
@@ -203,3 +242,4 @@ namespace Billard
         }
     }
 }
+

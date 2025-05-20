@@ -18,14 +18,14 @@ namespace Projet
     public partial class Restaurant
     {
         public List<Ingredient> listIngredients { get; set; }
-        public string Nom {  get; set; }
+        public string Nom { get; set; }
         public int personneMax { get; set; }
-        public double Argent {  get; set; }
-        public List <Facture> Factures { get; set; }
-        public List<Visiteur> Visiteurs {  get; set; }
+        public double Argent { get; set; }
+        public List<Facture> Factures { get; set; }
+        public List<Visiteur> Visiteurs { get; set; }
         public UsineClient UsineClient { get; set; }
         public List<Client> Clients { get; set; }
-        public Menu Menu {  get; set; }
+        public Menu Menu { get; set; }
         public Status Status { get; set; }
         public Restaurant(string nom, int personneMax, double argent)
         {
@@ -36,7 +36,7 @@ namespace Projet
             UsineClient = new UsineClient();
             Clients = new List<Client>();
             Menu = new Menu();
-            if ((Clients.Count + Visiteurs.Count <= personneMax)&&(Clients.Count + Visiteurs.Count > 0))
+            if ((Clients.Count + Visiteurs.Count <= personneMax) && (Clients.Count + Visiteurs.Count > 0))
             {
                 Status = Status.Dispo;
             }
@@ -65,20 +65,20 @@ namespace Projet
         public int CompterClient()
         {
             int nombreClient = 0;
-            foreach(Client client in Clients)
+            foreach (Client client in Clients)
             {
                 nombreClient++;
             }
             return nombreClient;
         }
         public int CompterPersonne()
-        {           
+        {
             int nombrePers = 0;
             foreach (Client client in Clients)
             {
                 nombrePers++;
             }
-            foreach (Visiteur vis in  Visiteurs)
+            foreach (Visiteur vis in Visiteurs)
             {
                 nombrePers++;
             }
@@ -117,11 +117,11 @@ namespace Projet
             Console.WriteLine(Menu);
             Console.WriteLine("Écrivez le nom exact du plat que vous voulez.");
             string choix = Console.ReadLine();
-            foreach(Plat plat in  Menu.Plats)
+            foreach (Plat plat in Menu.Plats)
             {
-                if(choix==plat.Nom)
+                if (choix == plat.Nom)
                 {
-                    Console.WriteLine("Vous avez choisi "+choix);
+                    Console.WriteLine("Vous avez choisi " + choix);
                 }
             }
         }
@@ -135,16 +135,16 @@ namespace Projet
             else
                 val = false;
 
-            return val; 
+            return val;
         }
         public void AfficherStatutResto()
         {
-            Console.WriteLine("Restaurant "+Nom+" capacité maximale de clients "+personneMax+"\nLes ingrédients actuellement Disponibles :");
-            foreach(var item in listIngredients)
+            Console.WriteLine("Restaurant " + Nom + " capacité maximale de clients " + personneMax + "\nLes ingrédients actuellement Disponibles :");
+            foreach (var item in listIngredients)
             {
                 Console.WriteLine(item);
             }
-            
+
             if (AfficherPlein())
             {
                 Console.WriteLine("Encore " + (personneMax - Clients.Count + Visiteurs.Count) + " places.");
@@ -160,8 +160,7 @@ namespace Projet
 
         public override string ToString()
         {
-            return "Le restaurant " + Nom + "\nstatut : "+Status+" nombre Clients : "+CompterClient();
+            return "Le restaurant " + Nom + "\nstatut : " + Status + " nombre Clients : " + CompterClient();
         }
     }
 }
- 

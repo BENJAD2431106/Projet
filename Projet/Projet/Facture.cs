@@ -31,9 +31,5 @@ namespace Projet
         {
             return "Facture : " + Client.Nom + " " + Client.Prenom + " achète " + AfficherPlats() + " Montant total débourssé : " + Montant;
         }
-        //public void AjouterPlat(Plat plat)
-        //{
-        //    Plats.Add(plat);
-        //}
     }
 }

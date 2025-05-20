@@ -13,7 +13,7 @@ namespace Billard
         Canne Canne { get; set; }
         public Joueur()
         {
-            Nom = "Ordi";
+            Nom = "Vincent";
             Canne = new Canne();
         }
         public Joueur(string nom, Canne canne)
@@ -23,7 +23,7 @@ namespace Billard
         }
         public Joueur(string nom)
         {
-            Nom = "Vincent";
+            Nom = nom;
             Canne = new Canne();
         }
         public override string ToString()

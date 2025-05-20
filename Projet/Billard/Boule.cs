@@ -38,6 +38,7 @@ namespace Billard
                 Numeros[i] = i + 1;
             }
         }
+        //effacer
 
         public Type TrouverType()
         {
